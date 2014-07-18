@@ -6,8 +6,13 @@ div(ng-include='"components/navbar/navbar.html"')
       label Archivo XLS original
       input(type="file", ng-file-select="", on-read="parseXls")
 
-    .form-group(ng-show="readyToDownload")
-      label Vista previa
-      textarea.form-control.output(ng-model="output")
+    div(ng-show="readyToDownload")
+      .form-group
+        label Vista previa
+        textarea.form-control.output(ng-model="output")
 
-    a.btn.btn-primary(role="button", download="content.txt", ng-href="{{ url }}", ng-show="readyToDownload") Descargar TXT
+      .form-group
+        label Filas excluidas
+        textarea.form-control.excluded(ng-model="excluded")
+
+      a.btn.btn-primary(role="button", download="resultado.txt", ng-href="{{ url }}") Descargar TXT (solo filas validas)

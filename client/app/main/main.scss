@@ -29,7 +29,9 @@
     border-top: 1px solid #E5E5E5;
 }
 
-.output {
+@mixin result($height) {
   font-family: Consolas,Monaco,Lucida Console,Liberation Mono,DejaVu Sans Mono,Bitstream Vera Sans Mono,Courier New, monospace;
-  height: 330px !important;
-}
+  height: $height !important;}
+
+.output { @include result(330px); }
+.excluded{ @include result(189px); }
