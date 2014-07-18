@@ -1,7 +1,7 @@
 'use strict'
 
 angular.module 'fixedSizeAdapterApp'
-.controller 'MainCtrl', ($scope) ->
+.controller 'MainCtrl', ($scope, $window) ->
   $scope.awesomeThings = []
 
   $scope.toFixedSize = (text, max) ->
@@ -15,9 +15,13 @@ angular.module 'fixedSizeAdapterApp'
   $scope.parseXls = (xls) ->
     workbook = XLS.read xls, type: "binary"
 
-    data = XLS.utils.sheet_to_json workbook.Sheets.Final
+    output = XLS.utils.sheet_to_json workbook.Sheets.Final
+    .map((row) -> "#{$scope.toFixedSize row.Codigo, 15} #{$scope.toFixedSize row.A, 5} #{$scope.toFixedSize row.B, 5}")
+    .reduce (one, another) -> "#{one}\n#{another}"
 
-    $scope.output = data
-      .map((row) -> "#{$scope.toFixedSize row.Codigo, 15} #{$scope.toFixedSize row.A, 5} #{$scope.toFixedSize row.B, 5}")
-      .reduce (one, another) -> "#{one}\n#{another}"
+    $scope.output = output
 
+    blob = new Blob [output], type : 'text/plain'
+    $scope.url = ($window.URL || $window.webkitURL).createObjectURL blob
+
+    $scope.readyToDownload = true

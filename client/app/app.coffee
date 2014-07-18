@@ -7,9 +7,11 @@ app = angular.module 'fixedSizeAdapterApp', [
   'ngRoute',
   'ui.bootstrap'
 ]
-.config ($routeProvider, $locationProvider) ->
+.config ($routeProvider, $locationProvider, $compileProvider) ->
   $routeProvider
   .otherwise
     redirectTo: '/'
 
   $locationProvider.html5Mode true
+
+  $compileProvider.aHrefSanitizationWhitelist /^\s*(https?|ftp|mailto|file|blob):/

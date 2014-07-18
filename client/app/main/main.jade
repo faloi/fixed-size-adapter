@@ -1,5 +1,13 @@
 div(ng-include='"components/navbar/navbar.html"')
 
 .container
-  input(type="file", ng-file-select="", on-read="parseXls")
-  textarea.form-control.output(ng-model="output")
+  form
+    .form-group
+      label Archivo XLS original
+      input(type="file", ng-file-select="", on-read="parseXls")
+
+    .form-group(ng-show="readyToDownload")
+      label Vista previa
+      textarea.form-control.output(ng-model="output")
+
+    a.btn.btn-primary(role="button", download="content.txt", ng-href="{{ url }}", ng-show="readyToDownload") Descargar TXT
