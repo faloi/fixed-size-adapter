@@ -6,7 +6,7 @@ class Ajuste
     @nombre = dto.NOMBRE
     @stock = dto.STOCK
 
-  estado: -> if !@id? then 'danger'
+  estaEnParsimotion: -> @id?
 
 angular.module 'fixedSizeAdapterApp'
 .controller 'MainCtrl', ($scope, Parsimotion, Syncer) ->

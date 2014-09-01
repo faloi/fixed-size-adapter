@@ -20,7 +20,7 @@ div(ng-include='"components/navbar/navbar.html"')
             th Id Parsimotion
             th Stock Parsimotion
         tbody
-          tr(ng-repeat="item in productos", ng-class="{success: item.id}")
+          tr(ng-repeat="item in productos", ng-class="{success: item.estaEnParsimotion(), danger: !item.estaEnParsimotion()}")
             td {{item.sku}}
             td {{item.nombre}}
             td {{item.stock}}
