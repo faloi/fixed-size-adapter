@@ -11,8 +11,4 @@ div(ng-include='"components/navbar/navbar.html"')
         label Vista previa
         textarea.form-control.output(ng-model="output")
 
-      .form-group
-        label Filas excluidas
-        textarea.form-control.excluded(ng-model="excluded")
-
       a.btn.btn-primary(role="button", download="resultado.txt", ng-href="{{ url }}") Descargar TXT (solo filas validas)
