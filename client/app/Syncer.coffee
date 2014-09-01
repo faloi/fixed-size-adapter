@@ -4,13 +4,16 @@ angular.module 'fixedSizeAdapterApp'
   BASE_URL = "http://api.parsimotion.com"
   path = (resource) -> "#{BASE_URL}/#{resource}"
 
-  stocks: $resource (path "products/:id/stocks"), id: "@id"
+  stocks: $resource (path "products/:id/stocks"), id: "@id",
+    update:
+      method: 'PUT'
+
   products: $resource (path "products"), {},
     query:
       isArray: false
 
 angular.module 'fixedSizeAdapterApp'
-.factory "Syncer", ->
+.factory "Syncer", (Parsimotion) ->
 
   class Syncer
     constructor: (@allProducts) ->
@@ -21,7 +24,20 @@ angular.module 'fixedSizeAdapterApp'
 
         if (product?)
           it.id = product.id
-          it.stockActual = product.variations[0].stocks[0].quantity
+          it.stockActual = (@getStock product).quantity
+          @updateStock(it, product).$promise.then => it.actualizado = true
+
+    updateStock: (ajuste, product) ->
+      Parsimotion.stocks.update { id: product.id }, [
+        variation: (@getVariante product).id
+        stocks: [
+          warehouse: (@getStock product).warehouse,
+          quantity: ajuste.stock
+        ]
+      ]
+
+    getVariante: (product) -> product.variations[0]
+    getStock: (product) -> (@getVariante product).stocks[0]
 
     getId: (ajuste) ->
       _.find @allProducts, sku: ajuste.sku

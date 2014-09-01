@@ -19,6 +19,7 @@ div(ng-include='"components/navbar/navbar.html"')
             th Stock
             th Id Parsimotion
             th Stock Parsimotion
+            th Fue actualizado?
         tbody
           tr(ng-repeat="item in productos", ng-class="{success: item.estaEnParsimotion(), danger: !item.estaEnParsimotion()}")
             td {{item.sku}}
@@ -26,3 +27,4 @@ div(ng-include='"components/navbar/navbar.html"')
             td {{item.stock}}
             td {{item.id}}
             td {{item.stockActual}}
+            td {{item.actualizado}}
