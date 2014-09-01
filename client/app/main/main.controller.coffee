@@ -6,17 +6,7 @@ angular.module 'fixedSizeAdapterApp'
 
   $scope.parseXls = (xls) ->
     workbook = XLS.read xls, type: "binary"
-    allRows = XLS.utils.sheet_to_json workbook.Sheets.mercado
-
-    stringify = (rows) ->
-      if (rows.length == 0)
-        ""
-      else
-        rows
-          .map((row) -> "#{row.REF} #{row.NOMBRE} #{row.STOCK}")
-          .reduce (one, another) -> "#{one}\n#{another}"
-
-    $scope.output = stringify allRows
+    $scope.output = XLS.utils.sheet_to_json workbook.Sheets.mercado
 
     blob = new Blob [$scope.output], type : 'text/plain'
     $scope.url = ($window.URL || $window.webkitURL).createObjectURL blob

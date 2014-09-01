@@ -7,8 +7,18 @@ div(ng-include='"components/navbar/navbar.html"')
       input(type="file", ng-file-select="", on-read="parseXls")
 
     div(ng-show="readyToDownload")
-      .form-group
-        label Vista previa
-        textarea.form-control.output(ng-model="output")
+      h3 Articulos
+
+      table(class="table table-striped")
+        thead
+          tr
+            th SKU
+            th Nombre
+            th Stock
+        tbody
+          tr(ng-repeat="item in output")
+            td {{item.REF}}
+            td {{item.NOMBRE}}
+            td {{item.STOCK}}
 
       a.btn.btn-primary(role="button", download="resultado.txt", ng-href="{{ url }}") Descargar TXT (solo filas validas)
