@@ -9,16 +9,20 @@ div(ng-include='"components/navbar/navbar.html"')
     div(ng-show="readyToDownload")
       h3 Articulos
 
+      button.btn.btn-primary(ng-click="sincronizar()") Sincronizar
+
       table(class="table table-striped")
         thead
           tr
             th SKU
             th Nombre
             th Stock
+            th Id Parsimotion
+            th Stock Parsimotion
         tbody
-          tr(ng-repeat="item in output")
-            td {{item.REF}}
-            td {{item.NOMBRE}}
-            td {{item.STOCK}}
-
-      a.btn.btn-primary(role="button", download="resultado.txt", ng-href="{{ url }}") Descargar TXT (solo filas validas)
+          tr(ng-repeat="item in productos")
+            td {{item.sku}}
+            td {{item.nombre}}
+            td {{item.stock}}
+            td {{item.id}}
+            td {{item.stockActual}}
