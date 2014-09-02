@@ -21,10 +21,10 @@ div(ng-include='"components/navbar/navbar.html"')
             th Stock Parsimotion
             th Fue actualizado?
         tbody
-          tr(ng-repeat="item in productos", ng-class="{success: item.estaEnParsimotion(), danger: !item.estaEnParsimotion()}")
+          tr(ng-repeat="item in productos | orderBy: ['actualizado', 'id']", ng-class="{success: item.estaEnParsimotion(), danger: !item.estaEnParsimotion()}")
             td {{item.sku}}
             td {{item.nombre}}
             td {{item.stock}}
             td {{item.id}}
             td {{item.stockActual}}
-            td {{item.actualizado}}
+            td {{item.actualizado | checkmark}}

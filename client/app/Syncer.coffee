@@ -25,6 +25,7 @@ angular.module 'fixedSizeAdapterApp'
         if (product?)
           it.id = product.id
           it.stockActual = (@getStock product).quantity
+          it.actualizado = false
           @updateStock(it, product).$promise.then => it.actualizado = true
 
     updateStock: (ajuste, product) ->
