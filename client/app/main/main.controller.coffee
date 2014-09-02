@@ -10,9 +10,15 @@ class Ajuste
 
 angular.module 'fixedSizeAdapterApp'
 .controller 'MainCtrl', ($scope, Parsimotion, Syncer) ->
+  getFirstSheet = (workbook) ->
+    workbook.Sheets[workbook.SheetNames[0]]
+
+  getDataFrom = (workbook) ->
+    XLS.utils.sheet_to_json (getFirstSheet workbook)
+
   $scope.parseXls = (xls) ->
     workbook = XLS.read xls, type: "binary"
-    $scope.productos = _.map (XLS.utils.sheet_to_json workbook.Sheets.mercado), (dto) -> new Ajuste dto
+    $scope.productos = _.map (getDataFrom workbook), (dto) -> new Ajuste dto
     $scope.readyToDownload = true
 
   $scope.sincronizar = ->
