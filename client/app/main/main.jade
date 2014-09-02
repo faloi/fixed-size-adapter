@@ -3,7 +3,7 @@ div(ng-include='"components/navbar/navbar.html"')
 .container
   form
     .form-group
-      label Archivo XLS original
+      label Seleccione el archivo con los stocks actualizados
       input(type="file", ng-file-select="", on-read="parseXls")
 
     div(ng-show="readyToDownload")
