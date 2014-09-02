@@ -29,6 +29,21 @@
     border-top: 1px solid #E5E5E5;
 }
 
+#logo {
+    background-image: url(/assets/images/isologo.png);
+    float: left;
+    padding: 15px;
+    font-size: 18px;
+    line-height: 20px;
+    background-repeat: no-repeat;
+    height: 50px;
+    width: 184px;
+    background-position-y: 18px;
+    background-size: 75%;
+    margin-left: 0;
+    background-position-x: 50%;
+}
+
 @mixin result($height) {
   font-family: Consolas,Monaco,Lucida Console,Liberation Mono,DejaVu Sans Mono,Bitstream Vera Sans Mono,Courier New, monospace;
   height: $height !important;}
