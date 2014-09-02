@@ -4,7 +4,7 @@ class Ajuste
   constructor: (dto) ->
     @sku = dto.REF
     @nombre = dto.NOMBRE
-    @stock = parseInt dto.STOCK
+    @stock = _.max [0, parseInt dto.STOCK]
 
   estaEnParsimotion: -> @id?
 
